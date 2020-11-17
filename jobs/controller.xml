@@ -1,0 +1,64 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.40">
+    <actions>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.7.2"/>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.7.2">
+            <jobProperties/>
+            <triggers/>
+            <parameters/>
+            <options/>
+        </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+    </actions>
+    <description></description>
+    <keepDependencies>false</keepDependencies>
+    <properties>
+        <hudson.model.ParametersDefinitionProperty>
+            <parameterDefinitions>
+                <hudson.model.StringParameterDefinition>
+                    <name>gitUrl</name>
+                    <description></description>
+                    <defaultValue></defaultValue>
+                    <trim>false</trim>
+                </hudson.model.StringParameterDefinition>
+                <hudson.model.StringParameterDefinition>
+                    <name>branchName</name>
+                    <description></description>
+                    <defaultValue></defaultValue>
+                    <trim>false</trim>
+                </hudson.model.StringParameterDefinition>
+            </parameterDefinitions>
+        </hudson.model.ParametersDefinitionProperty>
+        <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+            <triggers>
+                <org.jenkinsci.plugins.gwt.GenericTrigger plugin="generic-webhook-trigger@1.72">
+                    <spec></spec>
+                    <genericVariables>
+                        <org.jenkinsci.plugins.gwt.GenericVariable>
+                            <expressionType>JSONPath</expressionType>
+                            <key>branchName</key>
+                            <value>$.changes[0].ref.displayId</value>
+                            <regexpFilter></regexpFilter>
+                            <defaultValue></defaultValue>
+                        </org.jenkinsci.plugins.gwt.GenericVariable>
+                    </genericVariables>
+                    <regexpFilterText></regexpFilterText>
+                    <regexpFilterExpression></regexpFilterExpression>
+                    <printPostContent>false</printPostContent>
+                    <printContributedVariables>false</printContributedVariables>
+                    <causeString>Generic Cause</causeString>
+                    <token>X286_LoanCalcApp</token>
+                    <tokenCredentialId></tokenCredentialId>
+                    <silentResponse>false</silentResponse>
+                    <overrideQuietPeriod>false</overrideQuietPeriod>
+                </org.jenkinsci.plugins.gwt.GenericTrigger>
+            </triggers>
+        </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    </properties>
+    <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.83">
+        <script>
+        </script>
+        <sandbox>true</sandbox>
+    </definition>
+    <triggers/>
+    <disabled>false</disabled>
+</flow-definition>

@@ -1,0 +1,41 @@
+group 'com.westpac'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.jenkins-ci.org/releases' }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.4.6'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile "org.mockito:mockito-core:2.+"
+    testImplementation "com.lesfurets:jenkins-pipeline-unit:1.8"
+    testImplementation 'com.offbytwo.jenkins:jenkins-client:0.3.8'
+    testImplementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+    testImplementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+    testImplementation "org.mock-server:mockserver-junit-rule:5.11.1"
+    testCompile "org.testcontainers:testcontainers:1.15.0"
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = []
+        }
+        groovy {
+            srcDirs = ['src', 'vars']
+        }
+    }
+    test {
+        java {
+            srcDir 'test'
+        }
+    }
+}
